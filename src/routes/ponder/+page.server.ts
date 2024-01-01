@@ -13,7 +13,7 @@ const setPagination = (page: number) => {
 
 export const load: PageServerLoad = async ({ fetch, url }) => {
 	const page = Number(url.searchParams.get('page'));
-	const cached = await redis.get('products');
+	const cached = await redis.get(`products_page_${page}`);
 	if (cached) {
 		return { products: JSON.parse(cached) };
 	}
@@ -28,6 +28,6 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 	const productsData = await res.json();
 	const paginationRange = res.headers.get('content-range');
 	const paginationCount = Math.ceil(Number(paginationRange?.split('/')[1]) / 9);
-	redis.set('products', JSON.stringify({ productsData, paginationCount }), 'EX', 600);
+	redis.set(`products_page_${page}`, JSON.stringify({ productsData, paginationCount }), 'EX', 600);
 	return { products: { productsData, paginationCount } };
 };
