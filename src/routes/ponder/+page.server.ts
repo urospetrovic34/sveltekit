@@ -13,10 +13,10 @@ const setPagination = (page: number) => {
 
 export const load: PageServerLoad = async ({ fetch, url }) => {
 	const page = Number(url.searchParams.get('page'));
-	// const cached = await redis.get('products');
-	// if (cached) {
-	// 	return { products: JSON.parse(cached) };
-	// }
+	const cached = await redis.get('products');
+	if (cached) {
+		return { products: JSON.parse(cached) };
+	}
 	const res = await fetch(`${env.API_URL}/rest/v1/product?select=*,product_category(name)`, {
 		headers: {
 			apiKey: env.API_KEY,
@@ -28,6 +28,6 @@ export const load: PageServerLoad = async ({ fetch, url }) => {
 	const productsData = await res.json();
 	const paginationRange = res.headers.get('content-range');
 	const paginationCount = Math.ceil(Number(paginationRange?.split('/')[1]) / 9);
-	// redis.set('products', JSON.stringify({ productsData, paginationCount }), 'EX', 600);
+	redis.set('products', JSON.stringify({ productsData, paginationCount }), 'EX', 600);
 	return { products: { productsData, paginationCount } };
 };
