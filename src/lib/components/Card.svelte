@@ -5,7 +5,11 @@
 	export let slug: string = '';
 </script>
 
-<a data-sveltekit-preload-data="hover" href="/fabrics/{slug}" class="cursor-pointer">
+<a
+	data-sveltekit-preload-data="hover"
+	href="/fabrics/{slug}"
+	class="cursor-pointer min-w-[300px] min-h-[300px]"
+>
 	<div class="cursor-pointer overflow-hidden max-w-[300px] max-h-[300px]">
 		<img
 			src={image}
