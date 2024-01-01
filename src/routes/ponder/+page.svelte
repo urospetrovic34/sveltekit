@@ -20,7 +20,9 @@
 	<div class="flex flex-col items-center">
 		<div class="grid grid-cols-3 gap-4 my-5">
 			{#each productsData as product}
-				{#await preload(product.image) then _}
+				{#await preload(product.image)}
+					<Loader />
+				{:then product}
 					<Card
 						image={product.image}
 						slug={product.slug}
