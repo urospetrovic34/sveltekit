@@ -12,7 +12,7 @@ const setPagination = (page: number) => {
 };
 
 export const load: PageServerLoad = async ({ fetch, url }) => {
-	const page = Number(url.searchParams.get('page'));
+	const page = Number(url.searchParams.get('page') ?? 1);
 	const cached = await redis.get(`products_page_${page}`);
 	if (cached) {
 		return { products: JSON.parse(cached) };
