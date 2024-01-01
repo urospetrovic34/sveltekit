@@ -1,6 +1,8 @@
-<div class="flex flex-col gap-3 items-center justify-center">
-	<div class="spinner" />
-	<p class="text-xl">Loading...</p>
+<div class="h-full flex justify-center">
+	<div class="flex flex-col gap-3 items-center justify-center">
+		<div class="spinner" />
+		<p class="text-xl">Loading...</p>
+	</div>
 </div>
 
 <style lang="postcss">
