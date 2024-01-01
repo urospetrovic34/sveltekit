@@ -1,18 +1,26 @@
 <script lang="ts">
+	import type { PageData } from './$types';
 	import Card from '$lib/components/Card.svelte';
 	import Loader from '$lib/components/Loader.svelte';
-	export let data;
-	const { products } = data;
+	import Pagination from '$lib/components/pagination/Pagination.svelte';
+	export let data: PageData;
+	$: ({ productsData, paginationCount } = data.products);
 </script>
 
-{#await products}
+{#await productsData}
 	<Loader />
-{:then products}
+{:then productsData}
 	<div class="flex flex-col items-center">
-		<div class="grid grid-cols-3 gap-4 mb-5">
-			{#each products as product}
-				<Card image={product.image} name={product.name} />
+		<div class="grid grid-cols-3 gap-4 my-5">
+			{#each productsData as product}
+				<Card
+					image={product.image}
+					slug={product.slug}
+					name={product.name}
+					category={product.product_category.name}
+				/>
 			{/each}
 		</div>
+		<Pagination count={paginationCount} />
 	</div>
 {/await}
