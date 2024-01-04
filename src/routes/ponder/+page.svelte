@@ -12,7 +12,7 @@
 {:then productsData}
 	<div class="flex flex-col items-center">
 		<div class="grid grid-cols-3 gap-4 my-5">
-			{#each productsData as product}
+			{#each productsData as product (product.id)}
 				<Card
 					image={product.image}
 					slug={product.slug}

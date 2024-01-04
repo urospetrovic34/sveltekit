@@ -10,7 +10,6 @@
 		<img
 			src={image}
 			alt={name}
-			id={slug}
 			class="w-[300px] h-[300px] object-cover hover:scale-110 transition-[transform] duration-500"
 		/>
 	</div>
