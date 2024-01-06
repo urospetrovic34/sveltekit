@@ -14,6 +14,6 @@
 		</a>
 	</div>
 	<div class="flex flex-1">
-		<img {src} alt="Hero Banner" />
+		<img class="w-full" {src} alt="Hero Banner" />
 	</div>
 </div>
