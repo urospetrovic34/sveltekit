@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	let links = [
-		{ label: 'Ponder', slug: 'ponder' },
-		{ label: 'Eloquent', slug: 'eloquent' },
-		{ label: 'Resilient', slug: 'resilient' },
-		{ label: 'Conundrum', slug: 'conundrum' },
-		{ label: 'Zealous', slug: 'zealous' }
+		{ label: 'Ponder', slug: '/ponder' },
+		{ label: 'Eloquent', slug: '/eloquent' },
+		{ label: 'Resilient', slug: '/resilient' },
+		{ label: 'Conundrum', slug: '/conundrum' },
+		{ label: 'Zealous', slug: '/zealous' }
 	];
 </script>
 
@@ -13,7 +14,11 @@
 		<ul class="flex items-center justify-between">
 			{#each links as { label, slug }}
 				<li>
-					<a data-sveltekit-preload-data="hover" class="hover:underline" href="/{slug}">
+					<a
+						data-sveltekit-preload-data="hover"
+						class="hover:underline {$page.url.pathname === slug && 'underline'}"
+						href={slug}
+					>
 						{label}
 					</a>
 				</li>
